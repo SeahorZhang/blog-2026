@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+html {
+  cursor: url('@/assets/imgs/cursor.svg') 2 1, auto;
+  background-color: var(--color-bg);
+}
+
+:root {
+  --color-brand: #de4331;
+  --color-primary: #4E3F42;
+  --color-secondary: #7b888e;
+  --color-brand-secondary: #FCC841;
+  --color-bg: #eeeeee;
+  --color-border: #ffffff;
+  --color-card: #ffffff66;
+  --color-article: #ffffffcc;
+}
