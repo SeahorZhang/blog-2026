@@ -2,6 +2,7 @@
 import { useRafFn } from '@vueuse/core'
 import { ref } from 'vue'
 import WidgetCard from '@/components/WidgetCard.vue'
+import cardStyles from '@/config/card-styles.json'
 import Colon from './components/Colon.vue'
 import SevenSegmentDigit from './components/SevenSegmentDigit.vue'
 
@@ -12,10 +13,13 @@ const props = defineProps({
   },
 })
 
-const width = 310
-const height = 130
+const cardName = 'clockCard'
+const width = cardStyles[cardName].width
+const height = cardStyles[cardName].height
+const offset = cardStyles[cardName].offset
+const x = props.center.x + props.center.cardSpacing + props.center.width / 2
+const y = props.center.y - offset - height
 const times = ref(['0', '0', '0', '0', '0', '0'])
-
 function getTimes() {
   // 时间时分秒组成的数组，返回[h,h,m,m,s,s]
   const now = new Date()
@@ -25,13 +29,16 @@ function getTimes() {
 }
 getTimes()
 useRafFn(getTimes)
-const offset = 92
-const x = props.center.x + props.center.cardSpacing + props.center.width / 2
-const y = props.center.y - offset - height
 </script>
 
 <template>
-  <WidgetCard class="absolute" :style="{ width: `${width}px`, height: `${height}px`, top: `${y}px`, left: `${x}px` }">
+  <WidgetCard
+    class="absolute"
+    :width="width"
+    :height="height"
+    :x="x"
+    :y="y"
+  >
     <div className="bg-neutral-300 card-rounded flex h-full w-full items-center justify-center gap-1.5 p-2">
       <SevenSegmentDigit :value="times[0]" />
       <SevenSegmentDigit :value="times[1]" />

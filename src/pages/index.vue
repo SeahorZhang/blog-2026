@@ -2,7 +2,8 @@
 import { useWindowSize } from '@vueuse/core'
 import { computed } from 'vue'
 import ClockCard from '@/pages/widgets/clockCard/index.vue'
-import Me from '@/pages/widgets/me/index.vue'
+import HiCard from '@/pages/widgets/hiCard/index.vue'
+import NavCard from '@/pages/widgets/navCard/index.vue'
 
 const { width: innerWidth, height: innerHeight } = useWindowSize()
 
@@ -16,6 +17,7 @@ const center = computed(() => ({
 </script>
 
 <template>
-  <Me :center="center" />
-  <ClockCard :center="center" />
+  <HiCard :center="center" :order="1" />
+  <ClockCard :center="center" :order="2" />
+  <NavCard :center="center" :order="3" />
 </template>
