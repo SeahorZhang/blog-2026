@@ -33,7 +33,15 @@ const navs = [
     :x="x"
     :y="y"
   >
-    <div class="relative mt-2 space-y-2">
+    <div class="relative space-y-2">
+      <div class="flex flex-col gap-3 mb-6">
+        <div class="text-3xl leading-none font-medium ">
+          Seahor
+        </div>
+        <div class="text-gray-600 text-sm">
+          白天社畜打工人 晚上独立开发者
+        </div>
+      </div>
       <div
         v-for="(item, i) in navs"
         :key="i" class="text-secondary text-md relative z-10 flex items-center gap-3 rounded-full px-5 py-3"
