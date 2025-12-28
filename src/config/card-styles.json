@@ -2,26 +2,22 @@
   "hiCard": {
     "width": 360,
     "height": 288,
-    "order": 1,
-    "offsetX": null,
-    "offsetY": null,
-    "enabled": true
+    "order": 1
   },
   "clockCard": {
     "width": 310,
     "height": 130,
     "offset": 92,
-    "order": 4,
-    "offsetX": null,
-    "offsetY": null,
-    "enabled": true
+    "order": 2
   },
   "navCard": {
     "width": 280,
     "height": 368,
-    "order": 2,
-    "offsetX": null,
-    "offsetY": null,
-    "enabled": true
+    "order": 3
+  },
+  "socialButtons": {
+    "width": 190,
+    "height": 46,
+    "order": 4
   }
 }
