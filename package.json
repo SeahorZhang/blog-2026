@@ -27,6 +27,7 @@
     "@vitejs/plugin-vue": "^6.0.2",
     "eslint": "^9.39.2",
     "gh-pages": "^6.3.0",
+    "unplugin-auto-import": "^20.3.0",
     "vite": "npm:rolldown-vite@latest",
     "vite-plugin-vue-devtools": "^8.0.5"
   }

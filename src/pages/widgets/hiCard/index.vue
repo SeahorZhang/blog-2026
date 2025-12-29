@@ -42,7 +42,7 @@ const y = props.center.y - height / 2
     :y="y"
   >
     <img
-      src="@/assets/imgs/avatar.svg" alt="Me" class="w-28 h-28 rounded-full mx-auto mb-4"
+      src="@/assets/imgs/avatar.png" alt="Me" class="w-28 h-28 rounded-full mx-auto mb-4"
       :style="{ boxShadow: '0 16px 32px -5px #E2D9CE' }"
     >
     <h1 class="font-averia mt-3 text-2xl text-center">
