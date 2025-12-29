@@ -25,34 +25,38 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      # 安装 Node.js
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: 'pnpm'
 
-      # 启用 corepack（Node 16+ 自带）
-      - name: Enable Corepack
-        run: corepack enable
+      # 安装 pnpm（最稳定方式）
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
-      # 可选：锁定 pnpm 版本（推荐，保证本地/CI一致）
-      - name: Set pnpm version
-        run: corepack prepare pnpm@latest --activate
-
+      # 安装依赖
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # 构建项目
       - name: Build
         run: pnpm run build
 
+      # 配置 GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      # 上传 dist 目录
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: './dist'
+          path: ./dist
 
+      # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
