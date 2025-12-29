@@ -1,0 +1,1 @@
+import{n as e,r as t,t as n}from"./index-Dai2Cpzm.js";var r={};function i(n,r){return t(),e(`div`,null,` tools `)}var a=n(r,[[`render`,i]]);export{a as default};

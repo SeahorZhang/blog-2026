@@ -1,0 +1,1 @@
+import{t as e}from"./index-Dai2Cpzm.js";var t={};function n(e,t){return` projects `}var r=e(t,[[`render`,n]]);export{r as default};
