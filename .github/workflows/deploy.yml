@@ -25,38 +25,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      # 安装 Node.js
-      - name: Set up Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: lts/*
-          cache: 'pnpm'
-
-      # 安装 pnpm（最稳定方式）
+      # ① 先安装 pnpm（必须在前）
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 9
+          run_install: false
 
-      # 安装依赖
+      # ② 再安装 Node，并启用 pnpm cache
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      # ③ 安装依赖
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 构建项目
+      # ④ 构建
       - name: Build
         run: pnpm run build
 
-      # 配置 GitHub Pages
+      # ⑤ GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 上传 dist 目录
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./dist
 
-      # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
