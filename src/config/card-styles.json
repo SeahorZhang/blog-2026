@@ -12,11 +12,11 @@
   },
   "navCard": {
     "width": 280,
-    "height": 368,
+    "height": 352,
     "order": 3
   },
   "socialButtons": {
-    "width": 190,
+    "width": 323,
     "height": 46,
     "order": 4
   },

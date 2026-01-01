@@ -32,7 +32,7 @@ const navs = [
 ]
 
 const collapse = computed(() => route.name === 'home')
-const collapseWidth = 340
+const collapseWidth = 274
 const collapseHeight = 64
 const collapseX = 16
 const collapseY = 16
@@ -75,7 +75,7 @@ const cardInfo = computed(() => {
       class="flex items-center gap-3 rounded-full px-5 py-3 text-stone-500 hover:text-stone-900 hover:bg-white transition-colors duration-200"
       active-class="text-stone-900 bg-white"
     >
-      <Icon :icon="item.icon" class="h-7 w-7 [&_path]:stroke-2" />
+      <Icon :icon="item.icon" class="h-6 w-6 [&_path]:stroke-2" />
       <span v-if="collapse" class="text-primary font-medium">{{ item.name }}</span>
     </RouterLink>
   </WidgetCard>

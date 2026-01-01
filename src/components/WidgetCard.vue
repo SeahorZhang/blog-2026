@@ -24,8 +24,11 @@ watchEffect(() => {
 
 <template>
   <motion.div
-    v-if="show" class="card p-2 absolute" :initial="{ opacity: 0, scale: 0.6, width, height, x, y }"
-    :animate="{ opacity: 1, scale: 1, width, height, x, y }" :while-hover="{ scale: 1.05 }"
+    v-if="show"
+    class="card p-2 absolute"
+    :initial="{ opacity: 0, scale: 0.6, width, height, x, y }"
+    :animate="{ opacity: 1, scale: 1, width, height, x, y }"
+    :while-hover="{ scale: 1.05 }"
   >
     <slot />
   </motion.div>

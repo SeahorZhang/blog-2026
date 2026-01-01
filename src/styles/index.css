@@ -24,7 +24,7 @@ body, #app {
 }
 
 @utility card {
-  @apply absolute rounded-[40px] border-[var(--color-border)] border p-6;
+  @apply rounded-[40px] border-[var(--color-border)] border p-6;
   box-shadow: 0 40px 50px -32px #0000000d, inset 0 0 20px #ffffff40;
   background-color: var(--color-card);
   backdrop-filter: blur(4px);
