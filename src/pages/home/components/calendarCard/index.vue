@@ -12,15 +12,12 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  order: {
-    type: Number,
-    default: 0,
-  },
 })
 
 const cardName = 'calendarCard'
 const width = cardStyles[cardName].width
 const height = cardStyles[cardName].height
+const order = cardStyles[cardName].order
 const x = computed(() => props.center.x + props.cardSpacing + cardStyles.hiCard.width / 2)
 const y = computed(() => props.center.y - cardStyles.clockCard.offset + props.cardSpacing)
 

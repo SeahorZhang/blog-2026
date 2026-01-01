@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
+import NavVidw from '@/components/navCard/index.vue'
 import HomeView from '@/pages/home/index.vue'
-import NavVidw from '@/pages/widgets/navCard/index.vue'
 
 const routes = [
   {

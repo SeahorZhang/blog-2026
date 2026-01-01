@@ -1,8 +1,8 @@
 <script setup>
-import CalendarCard from '@/pages/widgets/calendarCard/index.vue'
-import ClockCard from '@/pages/widgets/clockCard/index.vue'
-import HiCard from '@/pages/widgets/hiCard/index.vue'
-import SocialButtons from '@/pages/widgets/socialButtons/index.vue'
+import CalendarCard from './components/calendarCard/index.vue'
+import ClockCard from './components/clockCard/index.vue'
+import HiCard from './components/hiCard/index.vue'
+import SocialButtons from './components/socialButtons/index.vue'
 
 const props = defineProps({
   center: {
@@ -18,7 +18,7 @@ const props = defineProps({
 
 <template>
   <HiCard v-bind="props" />
-  <ClockCard v-bind="props" :order="1" />
-  <SocialButtons v-bind="props" :order="3" />
-  <CalendarCard v-bind="props" :order="4" />
+  <ClockCard v-bind="props" />
+  <SocialButtons v-bind="props" />
+  <CalendarCard v-bind="props" />
 </template>

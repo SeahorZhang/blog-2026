@@ -12,14 +12,11 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  order: {
-    type: Number,
-    default: 0,
-  },
 })
 
 const cardName = 'socialButtons'
 const width = cardStyles[cardName].width
+const order = cardStyles[cardName].order
 const hiCardWidth = cardStyles.hiCard.width
 const hiCardHeight = cardStyles.hiCard.height
 const x = computed(() => props.center.x + hiCardWidth / 2 - width)
@@ -29,7 +26,7 @@ const show = ref(false)
 const show2 = ref(false)
 const show3 = ref(false)
 watchEffect(() => {
-  const delay = props.order * 0.2
+  const delay = order * 0.2
   setTimeout(() => {
     show.value = true
   }, delay * 1000)

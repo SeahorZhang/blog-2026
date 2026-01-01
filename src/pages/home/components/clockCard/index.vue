@@ -15,14 +15,11 @@ const props = defineProps({
     type: Number,
     required: true,
   },
-  order: {
-    type: Number,
-    default: 0,
-  },
 })
 
 const cardName = 'clockCard'
 const width = cardStyles[cardName].width
+const order = cardStyles[cardName].order
 const hiCardWidth = cardStyles.hiCard.width
 const height = cardStyles[cardName].height
 const offset = cardStyles[cardName].offset

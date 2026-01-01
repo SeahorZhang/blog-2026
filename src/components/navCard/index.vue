@@ -8,10 +8,6 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  order: {
-    type: Number,
-    default: 0,
-  },
   cardSpacing: {
     type: Number,
     required: true,
@@ -22,6 +18,7 @@ const route = useRoute()
 const cardName = 'navCard'
 const width = cardStyles[cardName].width
 const height = cardStyles[cardName].height
+const order = cardStyles[cardName].order
 const hiCardWidth = cardStyles.hiCard.width
 const hiCardHeight = cardStyles.hiCard.height
 const x = computed(() => props.center.x - hiCardWidth / 2 - props.cardSpacing - width)
@@ -62,7 +59,7 @@ const cardInfo = computed(() => {
 <template>
   <WidgetCard
     :width="cardInfo.width" :height="cardInfo.height" :x="cardInfo.x" :y="cardInfo.y"
-    :order="collapse ? props.order : 0"
+    :order="collapse ? order : 0"
     :class="!collapse ? 'flex p-0 items-center' : 'p-6 space-y-2 overflow-hidden'"
   >
     <div v-if="collapse" class="flex flex-col gap-3 mb-6">
