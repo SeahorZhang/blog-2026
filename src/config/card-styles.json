@@ -19,5 +19,11 @@
     "width": 190,
     "height": 46,
     "order": 4
+  },
+  "calendarCard": {
+    "width": 350,
+    "height": 286,
+    "offset": 0,
+    "order": 5
   }
 }
