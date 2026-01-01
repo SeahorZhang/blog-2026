@@ -11,14 +11,24 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  cardSpacing: {
+    type: Number,
+    required: true,
+  },
+  order: {
+    type: Number,
+    default: 0,
+  },
 })
 
 const cardName = 'clockCard'
 const width = cardStyles[cardName].width
+const hiCardWidth = cardStyles.hiCard.width
 const height = cardStyles[cardName].height
 const offset = cardStyles[cardName].offset
-const x = props.center.x + props.center.cardSpacing + props.center.width / 2
-const y = props.center.y - offset - height
+const x = computed(() => props.center.x + props.cardSpacing + hiCardWidth / 2)
+const y = computed(() => props.center.y - offset - height)
+
 const times = ref(['0', '0', '0', '0', '0', '0'])
 function getTimes() {
   // 时间时分秒组成的数组，返回[h,h,m,m,s,s]
@@ -27,19 +37,12 @@ function getTimes() {
   const [hours, minutes, seconds] = timeString.split(':')
   times.value = [...hours, ...minutes, ...seconds]
 }
-getTimes()
 useRafFn(getTimes)
 </script>
 
 <template>
-  <WidgetCard
-    class="absolute"
-    :width="width"
-    :height="height"
-    :x="x"
-    :y="y"
-  >
-    <div className="bg-neutral-300 card-rounded flex h-full w-full items-center justify-center gap-1.5 p-2">
+  <WidgetCard :width="width" :height="height" :x="x" :y="y" :order="order">
+    <div className="bg-neutral-300 card-rounded flex size-full items-center justify-center gap-1.5 p-2">
       <SevenSegmentDigit :value="times[0]" />
       <SevenSegmentDigit :value="times[1]" />
       <Colon />

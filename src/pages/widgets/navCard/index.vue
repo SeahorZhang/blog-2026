@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
@@ -13,6 +12,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  cardSpacing: {
+    type: Number,
+    required: true,
+  },
 })
 
 const route = useRoute()
@@ -21,8 +24,8 @@ const width = cardStyles[cardName].width
 const height = cardStyles[cardName].height
 const hiCardWidth = cardStyles.hiCard.width
 const hiCardHeight = cardStyles.hiCard.height
-const x = props.center.x - hiCardWidth / 2 - props.center.cardSpacing - width
-const y = props.center.y + hiCardHeight / 2 - height
+const x = computed(() => props.center.x - hiCardWidth / 2 - props.cardSpacing - width)
+const y = computed(() => props.center.y + hiCardHeight / 2 - height)
 
 const navs = [
   { name: '首页', icon: 'solar:home-angle-2-broken', link: '/' },
@@ -32,12 +35,35 @@ const navs = [
 ]
 
 const collapse = computed(() => route.name === 'home')
+const collapseWidth = 340
+const collapseHeight = 64
+const collapseX = 16
+const collapseY = 16
+const cardInfo = computed(() => {
+  if (!collapse.value) {
+    return {
+      width: collapseWidth,
+      height: collapseHeight,
+      x: collapseX,
+      y: collapseY,
+    }
+  }
+  else {
+    return {
+      width,
+      height,
+      x: x.value,
+      y: y.value,
+    }
+  }
+})
 </script>
 
 <template>
   <WidgetCard
-    class="absolute " :width="width" :height="height" :x="x" :y="y" :order="collapse ? props.order : 0"
-    :collapse="collapse" :class="!collapse ? 'flex p-0 items-center' : 'p-6 space-y-2 overflow-hidden'"
+    :width="cardInfo.width" :height="cardInfo.height" :x="cardInfo.x" :y="cardInfo.y"
+    :order="collapse ? props.order : 0"
+    :class="!collapse ? 'flex p-0 items-center' : 'p-6 space-y-2 overflow-hidden'"
   >
     <div v-if="collapse" class="flex flex-col gap-3 mb-6">
       <div class="text-3xl leading-none font-medium ">

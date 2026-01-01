@@ -8,6 +8,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  cardSpacing: {
+    type: Number,
+    required: true,
+  },
   order: {
     type: Number,
     default: 0,
@@ -19,7 +23,7 @@ const width = cardStyles[cardName].width
 const hiCardWidth = cardStyles.hiCard.width
 const hiCardHeight = cardStyles.hiCard.height
 const x = computed(() => props.center.x + hiCardWidth / 2 - width)
-const y = computed(() => props.center.y + hiCardHeight / 2 + props.center.cardSpacing)
+const y = computed(() => props.center.y + hiCardHeight / 2 + props.cardSpacing)
 
 const show = ref(false)
 const show2 = ref(false)
@@ -39,7 +43,10 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div v-if="show" class="absolute flex gap-2" :style="{ left: `${x}px`, top: `${y}px` }">
+  <div
+    v-if="show" class="absolute flex gap-2 flex-row-reverse"
+    :style="{ left: `${x}px`, top: `${y}px`, width: `${width}px` }"
+  >
     <motion.a
       :initial="{ opacity: 0, scale: 0.6 }" :animate="{ opacity: 1, scale: 1 }" :while-hover="{ scale: 1.05 }"
       href="https://github.com/SeahorZhang" target="_blank"

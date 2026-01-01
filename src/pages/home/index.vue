@@ -8,11 +8,15 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  cardSpacing: {
+    type: Number,
+    required: true,
+  },
 })
 </script>
 
 <template>
-  <HiCard :center="props.center" :order="1" />
-  <ClockCard :center="props.center" :order="2" />
-  <SocialButtons :center="props.center" :order="4" />
+  <HiCard v-bind="props" />
+  <ClockCard v-bind="props" :order="1" />
+  <SocialButtons v-bind="props" :order="3" />
 </template>

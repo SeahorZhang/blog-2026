@@ -7,14 +7,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
-  width: Number,
-  height: Number,
   x: Number,
   y: Number,
-  collapse: {
-    type: Boolean,
-    default: true,
-  },
+  width: Number,
+  height: Number,
 })
 
 const show = ref(false)
@@ -28,11 +24,8 @@ watchEffect(() => {
 
 <template>
   <motion.div
-    v-if="show" class="card p-2" :initial="!collapse
-      ? { left: 16, top: 16, width: 340, height: 64, opacity: 0, scale: 0.6 }
-      : { opacity: 0, scale: 0.6, left: x, top: y, width, height }" :animate="!collapse
-      ? { left: 16, top: 16, width: 340, height: 64, opacity: 1, scale: 1 }
-      : { opacity: 1, scale: 1, left: x, top: y, width, height }" :while-hover="{ scale: 1.05 }"
+    v-if="show" class="card p-2 absolute" :initial="{ opacity: 0, scale: 0.6, width, height, x, y }"
+    :animate="{ opacity: 1, scale: 1, width, height, x, y }" :while-hover="{ scale: 1.05 }"
   >
     <slot />
   </motion.div>

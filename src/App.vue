@@ -4,11 +4,9 @@ import { computed } from 'vue'
 import Background from './layout/background/index.vue'
 
 const { width: innerWidth, height: innerHeight } = useWindowSize()
+const cardSpacing = 36
 
 const center = computed(() => ({
-  cardSpacing: 36,
-  width: 360,
-  height: 310,
   x: Math.floor(innerWidth.value / 2),
   y: Math.floor(innerHeight.value / 2),
 }))
@@ -17,12 +15,12 @@ const center = computed(() => ({
 <template>
   <Background />
   <router-view v-slot="{ Component }" name="navVidw">
-    <component :is="Component" :center="center" :order="3" />
+    <component :is="Component" :center="center" :card-spacing="cardSpacing" :order="2" />
   </router-view>
 
   <router-view v-slot="{ Component, route }">
-    <component :is="Component" v-if="['home'].includes(route.name)" :center="center" />
-    <component :is="Component" v-else />
+    <component :is="Component" v-if="['home'].includes(route.name)" :center="center" :card-spacing="cardSpacing" />
+    <component :is="Component" v-else :card-spacing="cardSpacing" />
   </router-view>
 </template>
 
