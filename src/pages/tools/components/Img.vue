@@ -54,5 +54,5 @@ watch(() => icon, () => {
 </script>
 
 <template>
-  <img v-if="iconUrl" :src="iconUrl" class="size-14 shrink-0 rounded-xl object-contain" @error="handleIconError">
+  <img v-if="iconUrl" :src="iconUrl" class="size-12 shrink-0 rounded-xl object-contain" @error="handleIconError">
 </template>

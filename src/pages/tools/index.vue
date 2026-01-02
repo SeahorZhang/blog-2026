@@ -35,7 +35,7 @@ import Tag from './components/Tag.vue'
               </div>
             </div>
           </div>
-          <p class="flex-1 text-xs leading-relaxed text-stone-600">
+          <p class="flex-1 text-xs leading-relaxed text-stone-600 px-1.5">
             {{ item.desc }}
           </p>
           <div class="flex flex-wrap gap-2">
