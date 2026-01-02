@@ -1,6 +1,4 @@
 <script setup>
-import { useWindowSize } from '@vueuse/core'
-import { computed } from 'vue'
 import Background from '@/components/background/index.vue'
 
 const { width: innerWidth, height: innerHeight } = useWindowSize()

@@ -10,7 +10,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "icon": "node macAppIconFetcher/index.js"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",

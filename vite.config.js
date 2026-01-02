@@ -13,10 +13,8 @@ export default defineConfig({
     AutoImport({
       imports: ['vue', 'vue-router', '@vueuse/core'],
       // 缓存生成的文件
-      dts: 'src/auto-imports.d.js',
-      eslintrc: {
-        // enabled: true,
-      },
+      dts: 'auto-imports.d.ts',
+      vueTemplate: true,
     }),
     Info(),
     tailwindcss(),
