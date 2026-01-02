@@ -55,7 +55,7 @@ const visibleSocialLinks = computed(() => {
       :initial="{ opacity: 0, scale: 0.6 }"
       :animate="{ opacity: 1, scale: 1 }"
       :while-hover="{ scale: 1.05 }"
-      href="https://github.com/SeahorZhang"
+      :href="item.url"
       target="_blank"
       class="flex items-center  rounded-xl border-2 border-white   text-white px-3 py-1.5 cursor-pointer"
       :style="{ backgroundColor: item.bgColor }"
