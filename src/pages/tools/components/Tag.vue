@@ -15,6 +15,10 @@ const colors = {
     color: '#3451b2',
     bgColor: 'rgba(100, 108, 255, .14)',
   },
+  官网免费: {
+    color: '#3451b2',
+    bgColor: 'rgba(100, 108, 255, .14)',
+  },
   收费: {
     color: '#915930',
     bgColor: 'rgba(234, 179, 8, .14)',

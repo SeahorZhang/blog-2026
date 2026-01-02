@@ -31,12 +31,12 @@ import Tag from './components/Tag.vue'
                 />
               </div>
               <div class="text-xs text-stone-600">
-                本地播放器
+                {{ item.review }}
               </div>
             </div>
           </div>
-          <p class="text-xs leading-relaxed text-stone-600">
-            网页端像素绘画工具，支持组件化画布，多画布同时绘画，色彩变量
+          <p class="flex-1 text-xs leading-relaxed text-stone-600">
+            {{ item.desc }}
           </p>
           <div class="flex flex-wrap gap-2">
             <a
