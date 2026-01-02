@@ -50,6 +50,7 @@ const formattedTime = new Date(now).toLocaleString()
             v-for="link in socialLinks"
             :key="link.name"
             :href="link.url"
+            target="_blank"
             class="gap-1 flex items-center bg-card hover:bg-gray-200 rounded-lg border border-border px-3 py-1 text-sm transition-colors"
           >
             <Icon :icon="link.icon" />
