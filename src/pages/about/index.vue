@@ -32,7 +32,7 @@ const formattedTime = new Date(now).toLocaleString()
 
         <div class=" h-16">
           <a
-            href="2025.zhangxihe.com"
+            href="https://2025.zhangxihe.com"
             target="_blank"
             class="bg-card hover:bg-gray-200 rounded-lg border border-border px-3 py-1 text-sm transition-colors"
           >
