@@ -76,7 +76,7 @@ const cardInfo = computed(() => {
       active-class="text-stone-900 bg-white"
     >
       <Icon :icon="item.icon" class="h-6 w-6 [&_path]:stroke-2" />
-      <span v-if="collapse" class="text-primary font-medium">{{ item.name }}</span>
+      <span v-if="collapse" class="font-medium">{{ item.name }}</span>
     </RouterLink>
   </WidgetCard>
 </template>

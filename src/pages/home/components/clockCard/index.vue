@@ -39,7 +39,7 @@ useRafFn(getTimes)
 
 <template>
   <WidgetCard :width="width" :height="height" :x="x" :y="y" :order="order">
-    <div className="bg-neutral-300 card-rounded flex size-full items-center justify-center gap-1.5 p-2">
+    <div className="bg-neutral-300 rounded-4xl flex size-full items-center justify-center gap-1.5 p-2">
       <SevenSegmentDigit :value="times[0]" />
       <SevenSegmentDigit :value="times[1]" />
       <Colon />

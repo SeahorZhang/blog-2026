@@ -17,7 +17,7 @@ const segmentMap = {
 }
 
 const segments = computed(() => segmentMap[value] || segmentMap[0])
-const activeColor = 'var(--color-primary)'
+const activeColor = 'var(--color-base)'
 const inactiveColor = 'rgba(0, 0, 0, 0.05)'
 </script>
 

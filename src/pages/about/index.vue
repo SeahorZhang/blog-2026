@@ -12,7 +12,7 @@ const formattedTime = new Date(now).toLocaleString()
     <motion.div class="card" :initial="{ opacity: 0, scale: 0.6 }" :animate="{ opacity: 1, scale: 1 }">
       <div class="flex items-center gap-4">
         <img
-          src="@/assets/imgs/avatar.png" alt="App Icon"
+          src="@/assets/imgs/avatar/avatar.png" alt="App Icon"
           class="w-16 h-16 rounded-xl shadow-sm ring-1 ring-gray-200 dark:ring-gray-700"
         >
 

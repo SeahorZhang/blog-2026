@@ -1,30 +1,28 @@
 @import "tailwindcss";
 
-html {
-  cursor: url('@/assets/imgs/cursor.svg') 2 1, auto;
-  background-color: var(--color-bg);
-  height: 100%;
+@theme {
+  --color-primary: #de4331;
+  --color-border: #ffffff;
+  --color-card: #ffffff66;
+  --color-base: #4E3F42;
+	--color-brand-secondary: #FCC841;
 }
 
-body, #app {
+html {
+  @apply bg-gray-200 h-full text-base;
+  cursor: url('@/assets/imgs/cursor.svg') 2 1, auto;
+}
+
+body,
+#app {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-:root {
-  --color-brand: #de4331;
-  --color-primary: #4E3F42;
-  --color-secondary: #7b888e;
-  --color-brand-secondary: #FCC841;
-  --color-bg: #eeeeee;
-  --color-border: #ffffff;
-  --color-card: #ffffff66;
-  --color-article: #ffffffcc;
-}
 
 @utility card {
-  @apply rounded-[40px] border-[var(--color-border)] border p-6;
+  @apply rounded-[40px] border-border border p-6;
   box-shadow: 0 40px 50px -32px #0000000d, inset 0 0 20px #ffffff40;
   background-color: var(--color-card);
   backdrop-filter: blur(4px);
@@ -32,15 +30,8 @@ body, #app {
 
 
 @utility text-linear {
-	background: linear-gradient(to right bottom, #0003 0%, #aaa1), linear-gradient(to right bottom, var(--color-brand) 40%, var(--color-brand-secondary));
+	background: linear-gradient(to right bottom, #0003 0%, #aaa1), linear-gradient(to right bottom, var(--color-primary) 40%, var(--color-brand-secondary));
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
-}
-@utility card-rounded {
-	@apply rounded-[40px];
-	@supports (corner-shape: squircle) {
-		corner-shape: squircle;
-		@apply rounded-[64px];
-	}
 }

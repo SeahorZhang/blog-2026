@@ -128,13 +128,13 @@ const todayInfo = computed(() => {
   <WidgetCard class="p-6" :width="width" :height="height" :x="x" :y="y" :order="order">
     <div class="flex flex-col h-full w-full overflow-hidden">
       <!-- 月份标题 -->
-      <h2 class="text-left mb-3 shrink-0 px-2 text-sm text-[var(--color-secondary)]">
+      <h2 class="text-left mb-3 shrink-0 px-2 text-sm text-gray-500">
         {{ calendarData.year }}年{{ calendarData.month }}月{{ todayInfo.day }}日 星期{{ todayInfo.weekDay }}
       </h2>
 
       <!-- 星期标题 -->
       <div class="grid grid-cols-7  mb-3 shrink-0 ">
-        <div v-for="day in weekDays" :key="day" class="text-center text-xs font-medium text-[var(--color-secondary)]">
+        <div v-for="day in weekDays" :key="day" class="text-center text-xs font-medium text-gray-500">
           {{ day }}
         </div>
       </div>
@@ -143,10 +143,10 @@ const todayInfo = computed(() => {
       <div class="grid grid-cols-7 flex-1" style="grid-template-rows: repeat(6, minmax(0, 1fr));">
         <div
           v-for="(dayInfo, index) in calendarData.days" :key="index"
-          class="flex items-center justify-center text-sm w-full h-full min-h-0 overflow-hidden rounded-lg" :class="{
-            'text-[var(--color-secondary)] opacity-50': !dayInfo.isCurrentMonth,
-            'text-[var(--color-primary)]': dayInfo.isCurrentMonth && !isToday(dayInfo),
-            'today-cell': isToday(dayInfo),
+          class="flex items-center justify-center text-sm w-full h-full min-h-0 overflow-hidden rounded-lg"
+          :class="{
+            'text-gray-500/50': !dayInfo.isCurrentMonth,
+            'bg-primary border border-border font-bold text-white': isToday(dayInfo),
           }"
         >
           {{ dayInfo.day }}
@@ -155,14 +155,3 @@ const todayInfo = computed(() => {
     </div>
   </WidgetCard>
 </template>
-
-<style scoped>
-.today-cell {
-  background-color: var(--color-card);
-  border: 1px solid var(--color-border);
-  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.05), inset 0 0 8px rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(4px);
-  color: var(--color-primary);
-  font-weight: 600;
-}
-</style>
