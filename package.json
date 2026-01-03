@@ -8,9 +8,14 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build",
+    "lint": "run-s lint:*",
+    "lint:oxlint": "oxlint . --fix",
+    "lint:eslint": "eslint . --fix --cache",
+    "format": "prettier --write --experimental-cli src/",
     "icon": "node macAppIconFetcher/index.js"
   },
   "dependencies": {
@@ -24,13 +29,25 @@
     "vue-router": "4.6.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.7.3",
+    "@tsconfig/node24": "^24.0.3",
+    "@types/node": "^24.10.4",
     "@vitejs/plugin-vue": "^6.0.3",
+    "@vue/eslint-config-prettier": "^10.2.0",
+    "@vue/eslint-config-typescript": "^14.6.0",
+    "@vue/tsconfig": "^0.8.1",
     "eslint": "^9.39.2",
-    "gh-pages": "^6.3.0",
+    "eslint-plugin-oxlint": "~1.35.0",
+    "eslint-plugin-vue": "~10.6.2",
+    "jiti": "^2.6.1",
+    "npm-run-all2": "^8.0.4",
+    "oxlint": "~1.35.0",
+    "prettier": "3.7.4",
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@latest",
+    "vite-plugin-vue-devtools": "^8.0.5",
+    "vue-tsc": "^3.2.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "unplugin-auto-import": "^20.3.0",
-    "unplugin-info": "^1.2.4",
-    "vite": "npm:rolldown-vite@7.3.0",
-    "vite-plugin-vue-devtools": "^8.0.5"
+    "unplugin-info": "^1.2.4"
   }
 }

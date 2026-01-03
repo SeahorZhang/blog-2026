@@ -6,7 +6,7 @@ import cardStyles from '@/config/card-styles.json'
 import { cardSpacing, useViewport } from '@/hooks/useViewport'
 
 const cardName = 'socialButtons'
-const { isMobile, centerX, centerY,width:windowWidth } = useViewport()
+const { isMobile, centerX, centerY, width: windowWidth } = useViewport()
 const width = cardStyles[cardName].width
 const height = cardStyles[cardName].height
 const order = cardStyles[cardName].order
@@ -22,9 +22,12 @@ watchEffect(() => {
   setTimeout(() => {
     // 逐个显示每个社交链接项
     socialLinks.forEach((_, i) => {
-      setTimeout(() => {
-        visibleItems.value[i] = true
-      }, isMobile.value ? 0 : (socialLinks.length - i) * 100) // 每个项延迟 0.1 秒
+      setTimeout(
+        () => {
+          visibleItems.value[i] = true
+        },
+        isMobile.value ? 0 : (socialLinks.length - i) * 100,
+      ) // 每个项延迟 0.1 秒
     })
   }, delay * 1000)
 })
@@ -33,25 +36,33 @@ const visibleSocialLinks = computed(() => {
   return socialLinks.filter((_, i) => visibleItems.value[i])
 })
 
-const showName = computed(()=>windowWidth.value>500)
+const showName = computed(() => windowWidth.value > 500)
 </script>
 
 <template>
-  <WidgetCard class-name="p-0" :width="width" :height="height" :x="x" :y="y" :order="order" no-hover>
-    <div class="flex gap-2 justify-end">
+  <WidgetCard
+    class-name="p-0"
+    :width="width"
+    :height="height"
+    :x="x"
+    :y="y"
+    :order="order"
+    no-hover
+  >
+    <div class="flex justify-end gap-2">
       <motion.a
-        v-for="(item) in visibleSocialLinks" 
+        v-for="item in visibleSocialLinks"
         :key="item.name"
-         :initial="{ opacity: 0, scale: 0.6 }"
-        :animate="{ opacity: 1, scale: 1 }" 
-        :while-hover="{ scale: 1.05 }" 
+        :initial="{ opacity: 0, scale: 0.6 }"
+        :animate="{ opacity: 1, scale: 1 }"
+        :while-hover="{ scale: 1.05 }"
         :href="item.url"
-         target="_blank"
-        class="flex items-center  rounded-xl border-2 border-white  text-white px-3 py-1.5 cursor-pointer"
+        target="_blank"
+        class="flex cursor-pointer items-center rounded-xl border-2 border-white px-3 py-1.5 text-white"
         :style="{ backgroundColor: item.bgColor }"
       >
         <Icon class="text-3xl" :icon="item.icon" />
-         <span v-if="showName">{{ item.name }}</span>
+        <span v-if="showName">{{ item.name }}</span>
       </motion.a>
     </div>
   </WidgetCard>
