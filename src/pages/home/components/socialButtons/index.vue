@@ -35,17 +35,12 @@ const visibleSocialLinks = computed(() => {
 </script>
 
 <template>
-  <WidgetCard class-name="p-0" :width="width" :height="height" :x="x" :y="y" :order="order">
-    <div class=" flex gap-2 justify-end">
+  <WidgetCard class-name="p-0" :width="width" :height="height" :x="x" :y="y" :order="order" no-hover>
+    <div class="flex gap-2 justify-end">
       <motion.a
-        v-for="(item) in visibleSocialLinks"
-        :key="item.name"
-        :initial="{ opacity: 0, scale: 0.6 }"
-        :animate="{ opacity: 1, scale: 1 }"
-        :while-hover="{ scale: 1.05 }"
-        :href="item.url"
-        target="_blank"
-        class="flex items-center  rounded-xl border-2 border-white   text-white px-3 py-1.5 cursor-pointer"
+        v-for="(item) in visibleSocialLinks" :key="item.name" :initial="{ opacity: 0, scale: 0.6 }"
+        :animate="{ opacity: 1, scale: 1 }" :while-hover="{ scale: 1.05 }" :href="item.url" target="_blank"
+        class="flex items-center  rounded-xl border-2 border-white  text-white px-3 py-1.5 cursor-pointer"
         :style="{ backgroundColor: item.bgColor }"
       >
         <Icon class="text-3xl" :icon="item.icon" />

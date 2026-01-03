@@ -16,6 +16,10 @@ const props = defineProps({
     type: String,
     default: 'card p-2',
   },
+  noHover: {
+    type: Boolean,
+    dfeault: false,
+  },
 })
 
 const show = ref(false)
@@ -65,8 +69,8 @@ watchEffect(() => {
     :class="[className, cardClass]"
     :initial="initialProps"
     :animate="animateProps"
-    :while-hover="{ scale: 1.05 }"
-    :while-tap="{ scale: 0.95 }"
+    :while-hover=" props.noHover ? {} : { scale: 1.05 }"
+    :while-tap=" props.noHover ? {} : { scale: 0.95 }"
   >
     <slot />
   </motion.div>
