@@ -2,24 +2,15 @@
 import { computed } from 'vue'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
-
-const props = defineProps({
-  center: {
-    type: Object,
-    required: true,
-  },
-  cardSpacing: {
-    type: Number,
-    required: true,
-  },
-})
+import { cardSpacing, useViewport } from '@/hooks/useViewport'
 
 const cardName = 'calendarCard'
+const { centerX, centerY } = useViewport()
 const width = cardStyles[cardName].width
 const height = cardStyles[cardName].height
 const order = cardStyles[cardName].order
-const x = computed(() => props.center.x + props.cardSpacing + cardStyles.hiCard.width / 2)
-const y = computed(() => props.center.y - cardStyles.clockCard.offset + props.cardSpacing)
+const x = computed(() => centerX.value + cardSpacing + cardStyles.hiCard.width / 2)
+const y = computed(() => centerY.value - cardStyles.clockCard.offset + cardSpacing)
 
 // 获取当前月份的所有日期
 const calendarData = computed(() => {

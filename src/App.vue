@@ -1,24 +1,16 @@
 <script setup>
 import Background from '@/components/background/index.vue'
-
-const { width: innerWidth, height: innerHeight } = useWindowSize()
-const cardSpacing = 36
-
-const center = computed(() => ({
-  x: Math.floor(innerWidth.value / 2),
-  y: Math.floor(innerHeight.value / 2),
-}))
 </script>
 
 <template>
   <Background />
   <router-view v-slot="{ Component }" name="navVidw">
-    <component :is="Component" :center="center" :card-spacing="cardSpacing" />
+    <component :is="Component" />
   </router-view>
 
   <router-view v-slot="{ Component, route }">
-    <component :is="Component" v-if="['home'].includes(route.name)" :center="center" :card-spacing="cardSpacing" />
-    <component :is="Component" v-else :card-spacing="cardSpacing" />
+    <component :is="Component" v-if="['home'].includes(route.name)" />
+    <component :is="Component" v-else />
   </router-view>
 </template>
 

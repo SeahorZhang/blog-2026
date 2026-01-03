@@ -2,13 +2,7 @@
 import { computed } from 'vue'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
-
-const props = defineProps({
-  center: {
-    type: Object,
-    required: true,
-  },
-})
+import { useViewport } from '@/hooks/useViewport'
 
 const greeting = computed(() => {
   const hour = new Date().getHours()
@@ -27,11 +21,12 @@ const greeting = computed(() => {
 })
 
 const cardName = 'hiCard'
+const { centerX, centerY } = useViewport()
 const width = cardStyles[cardName].width
 const height = cardStyles[cardName].height
 const order = cardStyles[cardName].order
-const x = computed(() => props.center.x - width / 2)
-const y = computed(() => props.center.y - height / 2)
+const x = computed(() => centerX.value - width / 2)
+const y = computed(() => centerY.value - height / 2)
 </script>
 
 <template>

@@ -2,27 +2,18 @@
 import { useRoute } from 'vue-router'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
-
-const props = defineProps({
-  center: {
-    type: Object,
-    required: true,
-  },
-  cardSpacing: {
-    type: Number,
-    required: true,
-  },
-})
+import { cardSpacing, useViewport } from '@/hooks/useViewport'
 
 const route = useRoute()
 const cardName = 'navCard'
+const { isMobile, centerX, centerY } = useViewport()
 const width = cardStyles[cardName].width
 const height = cardStyles[cardName].height
 const order = cardStyles[cardName].order
 const hiCardWidth = cardStyles.hiCard.width
 const hiCardHeight = cardStyles.hiCard.height
-const x = computed(() => props.center.x - hiCardWidth / 2 - props.cardSpacing - width)
-const y = computed(() => props.center.y + hiCardHeight / 2 - height)
+const x = computed(() => centerX.value - hiCardWidth / 2 - cardSpacing - width)
+const y = computed(() => centerY.value + hiCardHeight / 2 - height)
 
 const navs = [
   { name: '首页', icon: 'solar:home-angle-2-broken', link: '/' },
@@ -31,18 +22,14 @@ const navs = [
   { name: '关于', icon: 'solar:document-broken', link: '/about' },
 ]
 
-const collapse = computed(() => route.name === 'home')
-const collapseWidth = 274
-const collapseHeight = 64
-const collapseX = 16
-const collapseY = 16
+const collapse = computed(() => route.name === 'home' && !isMobile.value)
 const cardInfo = computed(() => {
   if (!collapse.value) {
     return {
-      width: collapseWidth,
-      height: collapseHeight,
-      x: collapseX,
-      y: collapseY,
+      width: 274,
+      height: 64,
+      x: 16,
+      y: 16,
     }
   }
   else {

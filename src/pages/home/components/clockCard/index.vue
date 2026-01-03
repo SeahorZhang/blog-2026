@@ -1,30 +1,20 @@
 <script setup>
 import { useRafFn } from '@vueuse/core'
-import { ref } from 'vue'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
+import { cardSpacing, useViewport } from '@/hooks/useViewport'
 import Colon from './components/Colon.vue'
 import SevenSegmentDigit from './components/SevenSegmentDigit.vue'
 
-const props = defineProps({
-  center: {
-    type: Object,
-    required: true,
-  },
-  cardSpacing: {
-    type: Number,
-    required: true,
-  },
-})
-
 const cardName = 'clockCard'
+const { centerX, centerY } = useViewport()
 const width = cardStyles[cardName].width
 const order = cardStyles[cardName].order
-const hiCardWidth = cardStyles.hiCard.width
 const height = cardStyles[cardName].height
 const offset = cardStyles[cardName].offset
-const x = computed(() => props.center.x + props.cardSpacing + hiCardWidth / 2)
-const y = computed(() => props.center.y - offset - height)
+const hiCardWidth = cardStyles.hiCard.width
+const x = computed(() => centerX.value + cardSpacing + hiCardWidth / 2)
+const y = computed(() => centerY.value - offset - height)
 
 const times = ref(['0', '0', '0', '0', '0', '0'])
 function getTimes() {
