@@ -31,8 +31,7 @@ const cardInfo = computed(() => {
       x: 16,
       y: 16,
     }
-  }
-  else {
+  } else {
     return {
       width,
       height,
@@ -45,21 +44,23 @@ const cardInfo = computed(() => {
 
 <template>
   <WidgetCard
-    :width="cardInfo.width" :height="cardInfo.height" :x="cardInfo.x" :y="cardInfo.y"
+    :width="cardInfo.width"
+    :height="cardInfo.height"
+    :x="cardInfo.x"
+    :y="cardInfo.y"
     :order="collapse ? order : 0"
-    :class="!collapse ? 'flex p-0 items-center' : 'p-6 space-y-2 overflow-hidden'"
+    :class="!collapse ? 'flex items-center p-0' : 'space-y-2 overflow-hidden p-6'"
+    class="z-1"
   >
-    <div v-if="collapse" class="flex flex-col gap-3 mb-6">
-      <div class="text-3xl leading-none font-medium ">
-        Seahor
-      </div>
-      <div class="text-gray-600 text-sm">
-        白天社畜打工人 晚上独立开发者
-      </div>
+    <div v-if="collapse" class="mb-6 flex flex-col gap-3">
+      <div class="text-3xl leading-none font-medium">Seahor</div>
+      <div class="text-sm text-gray-600">白天社畜打工人 晚上独立开发者</div>
     </div>
     <RouterLink
-      v-for="(item, i) in navs" :key="i" :to="item.link"
-      class="flex items-center gap-3 rounded-full px-5 py-3 text-stone-500 hover:text-stone-900 hover:bg-white transition-colors duration-200"
+      v-for="(item, i) in navs"
+      :key="i"
+      :to="item.link"
+      class="flex items-center gap-3 rounded-full px-5 py-3 text-stone-500 transition-colors duration-200 hover:bg-white hover:text-stone-900"
       active-class="text-stone-900 bg-white"
     >
       <Icon :icon="item.icon" class="h-6 w-6 [&_path]:stroke-2" />
