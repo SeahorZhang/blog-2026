@@ -1,11 +1,12 @@
 <script setup>
 import { computed } from 'vue'
-import avatarImg from '@/assets/imgs/avatar/avatar.png'
+import { useAppearance } from '@/config/theme'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
 
 const cardName = 'hiCard'
 const { width, height, order } = cardStyles[cardName]
+const { currentAvatar } = useAppearance()
 
 function getGreeting() {
   const hour = new Date().getHours()
@@ -25,14 +26,14 @@ function getGreeting() {
 
 const greeting = getGreeting()
 const avatarStyle = computed(() => ({
-  boxShadow: '0 16px 32px -5px #E2D9CE',
+  boxShadow: `0 16px 32px -5px ${currentAvatar.value.shadow}`,
 }))
 </script>
 
 <template>
   <WidgetCard class="card p-6" :order="order" :width="width" :height="height">
     <img
-      :src="avatarImg"
+      :src="currentAvatar.image"
       alt="Me"
       width="112"
       height="112"

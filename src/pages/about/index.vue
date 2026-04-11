@@ -1,13 +1,32 @@
 <script setup>
+import { computed } from 'vue'
 import { motion } from 'motion-v'
-import avatarImg from '@/assets/imgs/avatar/avatar.png'
 import { version } from '~build/package'
 import now from '~build/time'
 import { socialLinks } from '@/config/baseInfo.js'
+import { useAppearance } from '@/config/theme'
 import { useViewport } from '@/hooks/useViewport'
 
 const { isMobile } = useViewport()
+const { currentAvatar, siteAppearance, avatarOptions, themeOptions, setAvatar, setTheme } = useAppearance()
 const formattedTime = new Date(now).toLocaleString()
+
+const settingGroups = computed(() => [
+  {
+    key: 'theme',
+    title: '页面主题',
+    value: siteAppearance.theme,
+    options: themeOptions,
+    update: setTheme,
+  },
+  {
+    key: 'avatar',
+    title: '头像样式',
+    value: siteAppearance.avatar,
+    options: avatarOptions,
+    update: setAvatar,
+  },
+])
 </script>
 
 <template>
@@ -19,7 +38,7 @@ const formattedTime = new Date(now).toLocaleString()
     >
       <div class="flex items-center gap-4" :class="{ 'flex-col': isMobile }">
         <img
-          :src="avatarImg"
+          :src="currentAvatar.image"
           alt="App Icon"
           width="64"
           height="64"
@@ -64,6 +83,44 @@ const formattedTime = new Date(now).toLocaleString()
             <Icon :icon="link.icon" />
             <span>{{ link.label }}</span>
           </a>
+        </div>
+      </div>
+    </motion.div>
+
+    <motion.div
+      class="card p-6"
+      :initial="{ opacity: 0, scale: 0.6 }"
+      :animate="{ opacity: 1, scale: 1 }"
+      :transition="{ delay: 0.08 }"
+    >
+      <div class="mb-5">
+        <h3 class="text-xl font-semibold text-gray-900">主题设置</h3>
+        <p class="mt-1 text-sm text-gray-600">
+          可以分别切换页面主题和头像样式，设置会自动保存在当前浏览器。
+        </p>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-2">
+        <div
+          v-for="group in settingGroups"
+          :key="group.key"
+          class="rounded-3xl border border-white/60 bg-white/45 p-4"
+        >
+          <div class="mb-3 text-sm font-medium text-gray-500">{{ group.title }}</div>
+          <div class="flex flex-wrap gap-2">
+            <button
+              v-for="option in group.options"
+              :key="option.value"
+              type="button"
+              class="rounded-full border px-4 py-2 text-sm font-medium transition-all"
+              :class="option.value === group.value
+                ? 'border-border bg-primary text-white shadow-sm'
+                : 'border-white/70 bg-white/70 text-gray-700 hover:bg-white'"
+              @click="group.update(option.value)"
+            >
+              {{ option.label }}
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>

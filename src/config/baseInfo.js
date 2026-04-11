@@ -2,10 +2,6 @@ import pineceWebextImg from '@/assets/imgs/projects/pineceWebextImg.png'
 import syncCookiesImg from '@/assets/imgs/projects/syncCookiesImg.png'
 import wtabImg from '@/assets/imgs/projects/wtab.png'
 
-export const settings = {
-  christmas: false,
-}
-
 export const socialLinks = [
   {
     label: 'GitHub',

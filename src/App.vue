@@ -1,5 +1,15 @@
 <script setup>
+import { watchEffect } from 'vue'
 import Background from '@/components/background/index.vue'
+import { useAppearance } from '@/config/theme'
+
+const { currentTheme } = useAppearance()
+
+watchEffect(() => {
+  Object.entries(currentTheme.value.cssVars).forEach(([key, value]) => {
+    document.documentElement.style.setProperty(key, value)
+  })
+})
 </script>
 
 <template>
