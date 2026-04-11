@@ -50,12 +50,13 @@ const cardInfo = computed(() => {
     :class="[
       !collapse ? 'flex items-center justify-center gap-1.5 p-0' : 'space-y-2 overflow-hidden p-6',
       cardInfo.offset,
+      isMobile ? '' : 'fixed',
     ]"
-    class="fixed z-1 card"
+    class="z-1 card"
     :width="cardInfo.width"
     :height="cardInfo.height"
-    :x="cardInfo.x"
-    :y="cardInfo.y"
+    :x="isMobile ? 0 : cardInfo.x"
+    :y="isMobile ? 0 : cardInfo.y"
   >
     <div v-if="collapse" class="mb-6 flex flex-col gap-3">
       <div class="text-3xl leading-none font-medium">Seahor</div>

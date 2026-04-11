@@ -17,6 +17,8 @@
     "order": 2
   },
   "socialButtons": {
+    "width": 323,
+    "height": 46,
     "offset": "right-0 -bottom-10 translate-y-full",
     "order": 3
   },

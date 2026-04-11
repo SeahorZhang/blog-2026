@@ -38,6 +38,9 @@ function buildMotionStyle(baseStyle) {
     if (props.y != null) {
       style.y = props.y
     }
+  } else {
+    style.x = 0
+    style.y = 0
   }
 
   return style

@@ -4,7 +4,9 @@ import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
 import Colon from './components/Colon.vue'
 import SevenSegmentDigit from './components/SevenSegmentDigit.vue'
+import { useViewport } from '@/hooks/useViewport'
 
+const { isMobile } = useViewport()
 const cardName = 'clockCard'
 const { width, height, order, offset } = cardStyles[cardName]
 
@@ -36,17 +38,12 @@ onBeforeUnmount(() => {
     clearTimeout(timer)
   }
 })
-
-const cardSize = computed(() => ({
-  width: `${width}px`,
-  height: `${height}px`,
-}))
 </script>
 
 <template>
   <WidgetCard
-    class="absolute card p-2"
-    :class="offset"
+    class="card p-2"
+    :class="isMobile ? '' : 'absolute' + ' ' + offset"
     :order="order"
     :width="width"
     :height="height"

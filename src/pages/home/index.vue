@@ -6,7 +6,7 @@ import HiCard from './components/hiCard/index.vue'
 import SocialButtons from './components/socialButtons/index.vue'
 import { useViewport } from '@/hooks/useViewport'
 
-const { centerX, centerY } = useViewport()
+const { isMobile, centerX, centerY } = useViewport()
 const centerStyle = computed(() => ({
   left: `${centerX.value}px`,
   top: `${centerY.value}px`,
@@ -14,7 +14,11 @@ const centerStyle = computed(() => ({
 </script>
 
 <template>
-  <div class="absolute -translate-x-1/2 -translate-y-1/2" :style="centerStyle">
+  <div
+    class=""
+    :class="isMobile ? '' : 'absolute -translate-x-1/2 -translate-y-1/2'"
+    :style="centerStyle"
+  >
     <HiCard />
     <ClockCard />
     <SocialButtons />

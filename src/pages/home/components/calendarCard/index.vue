@@ -2,7 +2,9 @@
 import { computed } from 'vue'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
+import { useViewport } from '@/hooks/useViewport'
 
+const { isMobile } = useViewport()
 const cardName = 'calendarCard'
 const { width, height, order, offset } = cardStyles[cardName]
 const weekDays = ['一', '二', '三', '四', '五', '六', '日']
@@ -72,8 +74,8 @@ const calendarData = computed(() => {
 
 <template>
   <WidgetCard
-    class="absolute card p-6"
-    :class="offset"
+    class="card p-6"
+    :class="isMobile ? '' : 'absolute' + ' ' + offset"
     :order="order"
     :width="width"
     :height="height"
@@ -102,7 +104,7 @@ const calendarData = computed(() => {
           class="flex h-full min-h-0 w-full items-center justify-center overflow-hidden rounded-lg text-sm"
           :class="{
             'text-gray-500/50': !dayInfo.isCurrentMonth,
-            'border calendar-today border-border font-bold text-white': dayInfo.isToday,
+            'border border-border calendar-today font-bold text-white': dayInfo.isToday,
           }"
         >
           {{ dayInfo.day }}

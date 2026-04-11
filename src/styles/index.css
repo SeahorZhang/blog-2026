@@ -66,6 +66,14 @@ body,
   padding: 0;
 }
 
+body {
+  overflow: hidden;
+}
+
+#app {
+  overflow-y: auto
+}
+
 @utility card {
   @apply rounded-[40px] border-border border p-6;
   box-shadow: 0 40px 50px -32px #0000000d, inset 0 0 20px #ffffff40;
