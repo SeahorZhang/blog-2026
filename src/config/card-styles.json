@@ -2,28 +2,28 @@
   "hiCard": {
     "width": 360,
     "height": 310,
+    "order": 0
+  },
+  "navCard": {
+    "width": 280,
+    "height": 352,
+    "offset": "-translate-x-full",
     "order": 1
   },
   "clockCard": {
     "width": 310,
     "height": 130,
-    "offset": 92,
+    "offset": "-right-10 -top-12 translate-x-full",
     "order": 2
   },
-  "navCard": {
-    "width": 280,
-    "height": 352,
-    "order": 3
-  },
   "socialButtons": {
-    "width": 323,
-    "height": 46,
-    "order": 4
+    "offset": "right-0 -bottom-10 translate-y-full",
+    "order": 3
   },
   "calendarCard": {
     "width": 350,
     "height": 286,
-    "offset": 0,
-    "order": 4
+    "offset": "-right-10 top-30 translate-x-full",
+    "order": 3
   }
 }

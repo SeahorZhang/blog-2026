@@ -1,35 +1,57 @@
 <script setup>
-import { useRafFn } from '@vueuse/core'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
-import { cardSpacing, useViewport } from '@/hooks/useViewport'
 import Colon from './components/Colon.vue'
 import SevenSegmentDigit from './components/SevenSegmentDigit.vue'
 
 const cardName = 'clockCard'
-const { centerX, centerY } = useViewport()
-const width = cardStyles[cardName].width
-const order = cardStyles[cardName].order
-const height = cardStyles[cardName].height
-const offset = cardStyles[cardName].offset
-const hiCardWidth = cardStyles.hiCard.width
-const x = computed(() => centerX.value + cardSpacing + hiCardWidth / 2)
-const y = computed(() => centerY.value - offset - height)
+const { width, height, order, offset } = cardStyles[cardName]
 
 const times = ref(['0', '0', '0', '0', '0', '0'])
-function getTimes() {
-  // 时间时分秒组成的数组，返回[h,h,m,m,s,s]
+let timer = null
+
+function updateTimes() {
   const now = new Date()
-  const timeString = now.toLocaleTimeString([], { hour12: false })
-  const [hours, minutes, seconds] = timeString.split(':')
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  const seconds = String(now.getSeconds()).padStart(2, '0')
+
   times.value = [...hours, ...minutes, ...seconds]
 }
-useRafFn(getTimes)
+
+function scheduleNextTick() {
+  updateTimes()
+
+  const delay = 1000 - new Date().getMilliseconds()
+  timer = setTimeout(scheduleNextTick, delay)
+}
+
+onMounted(() => {
+  scheduleNextTick()
+})
+
+onBeforeUnmount(() => {
+  if (timer) {
+    clearTimeout(timer)
+  }
+})
+
+const cardSize = computed(() => ({
+  width: `${width}px`,
+  height: `${height}px`,
+}))
 </script>
 
 <template>
-  <WidgetCard :width="width" :height="height" :x="x" :y="y" :order="order">
-    <div className="bg-neutral-300 rounded-4xl flex size-full items-center justify-center gap-1.5 p-2">
+  <WidgetCard
+    class="absolute card p-2"
+    :class="offset"
+    :order="order"
+    :width="width"
+    :height="height"
+  >
+    <div class="flex size-full items-center justify-center gap-1.5 rounded-4xl bg-neutral-300 p-2">
       <SevenSegmentDigit :value="times[0]" />
       <SevenSegmentDigit :value="times[1]" />
       <Colon />

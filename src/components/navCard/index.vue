@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
-import { cardSpacing, useViewport } from '@/hooks/useViewport'
+import { useViewport } from '@/hooks/useViewport'
 
 const route = useRoute()
 const cardName = 'navCard'
@@ -10,10 +10,11 @@ const { isMobile, centerX, centerY } = useViewport()
 const width = cardStyles[cardName].width
 const height = cardStyles[cardName].height
 const order = cardStyles[cardName].order
+const offset = cardStyles[cardName].offset
 const hiCardWidth = cardStyles.hiCard.width
 const hiCardHeight = cardStyles.hiCard.height
-const x = computed(() => centerX.value - hiCardWidth / 2 - cardSpacing - width)
-const y = computed(() => centerY.value + hiCardHeight / 2 - height)
+const x = computed(() => centerX.value - hiCardWidth / 2)
+const y = computed(() => centerY.value - hiCardHeight / 2)
 
 const navs = [
   { name: '首页', icon: 'solar:home-angle-2-broken', link: '/' },
@@ -35,8 +36,9 @@ const cardInfo = computed(() => {
     return {
       width,
       height,
-      x: x.value,
+      x: x.value - 45,
       y: y.value,
+      offset,
     }
   }
 })
@@ -44,21 +46,24 @@ const cardInfo = computed(() => {
 
 <template>
   <WidgetCard
+    :order="collapse ? order : 0"
+    :class="[
+      !collapse ? 'flex items-center p-0' : 'space-y-2 overflow-hidden p-6',
+      cardInfo.offset,
+    ]"
+    class="fixed z-1 card"
     :width="cardInfo.width"
     :height="cardInfo.height"
     :x="cardInfo.x"
     :y="cardInfo.y"
-    :order="collapse ? order : 0"
-    :class="!collapse ? 'flex items-center p-0' : 'space-y-2 overflow-hidden p-6'"
-    class="z-1"
   >
     <div v-if="collapse" class="mb-6 flex flex-col gap-3">
       <div class="text-3xl leading-none font-medium">Seahor</div>
       <div class="text-sm text-gray-600">白天社畜打工人 晚上独立开发者</div>
     </div>
     <RouterLink
-      v-for="(item, i) in navs"
-      :key="i"
+      v-for="item in navs"
+      :key="item.link"
       :to="item.link"
       class="flex items-center gap-3 rounded-full px-5 py-3 text-stone-500 transition-colors duration-200 hover:bg-white hover:text-stone-900"
       active-class="text-stone-900 bg-white"

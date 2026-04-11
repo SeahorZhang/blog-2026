@@ -5,7 +5,50 @@
   --color-border: #ffffff;
   --color-card: #ffffff66;
   --color-base: #4E3F42;
-	--color-brand-secondary: #FCC841;
+  --color-brand-secondary: #FCC841;
+  --animate-blob: blob 12s ease-in-out infinite;
+  --animate-blob-center: blobCenter 12s ease-in-out infinite;
+
+  @keyframes blob {
+
+    0%,
+    100% {
+      transform: translate(0) scale(1);
+    }
+
+    25% {
+      transform: translate(120px, -140px) scale(1.25);
+    }
+
+    50% {
+      transform: translate(-100px, -120px) scale(.85);
+    }
+
+    75% {
+      transform: translate(-120px, 100px) scale(1.15);
+    }
+  }
+
+
+  @keyframes blobCenter {
+
+    0%,
+    100% {
+      transform: translate(-50%) scale(1);
+    }
+
+    25% {
+      transform: translate(-50%, -20px) scale(1.1);
+    }
+
+    50% {
+      transform: translate(-50%, 20px) scale(.95);
+    }
+
+    75% {
+      transform: translate(-50%, -10px) scale(1.05);
+    }
+  }
 }
 
 html {
@@ -30,8 +73,8 @@ body,
 
 
 @utility text-linear {
-	background: linear-gradient(to right bottom, #0003 0%, #aaa1), linear-gradient(to right bottom, var(--color-primary) 40%, var(--color-brand-secondary));
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	background-clip: text;
+  background: linear-gradient(to right bottom, #0003 0%, #aaa1), linear-gradient(to right bottom, var(--color-primary) 40%, var(--color-brand-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

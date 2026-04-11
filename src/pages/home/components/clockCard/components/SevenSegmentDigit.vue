@@ -22,7 +22,14 @@ const inactiveColor = 'rgba(0, 0, 0, 0.05)'
 </script>
 
 <template>
-  <svg width="29" height="52" viewBox="0 0 29 52" fill="none" xmlns="http://www.w3.org/2000/svg" :className="className">
+  <svg
+    width="29"
+    height="52"
+    viewBox="0 0 29 52"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    :className="className"
+  >
     <path
       d="M4.20248 3.49482C2.82797 2.27303 3.69218 0 5.53121 0H22.6867C24.5522 0 25.4019 2.32821 23.975 3.52982L23.5791 3.86316C23.2186 4.16681 22.7623 4.33333 22.2909 4.33333H5.90621C5.41638 4.33333 4.94359 4.15358 4.57748 3.82815L4.20248 3.49482Z"
       :fill="segments[0] ? activeColor : inactiveColor"

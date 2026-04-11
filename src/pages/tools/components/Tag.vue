@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+
 const { text } = defineProps({
   text: {
     type: String,
@@ -24,13 +26,23 @@ const colors = {
     bgColor: 'rgba(234, 179, 8, .14)',
   },
 }
+
+const defaultColor = {
+  color: '#5f6b7a',
+  bgColor: 'rgba(148, 163, 184, 0.16)',
+}
+
+const tagStyle = computed(() => {
+  const color = colors[text] ?? defaultColor
+  return {
+    backgroundColor: color.bgColor,
+    color: color.color,
+  }
+})
 </script>
 
 <template>
-  <span
-    class="text-secondary rounded-sm px-1 py-0.5 text-xs"
-    :style="{ backgroundColor: colors[text].bgColor, color: colors[text].color }"
-  >
+  <span class="text-secondary rounded-sm px-1 py-0.5 text-xs" :style="tagStyle">
     {{ text }}
   </span>
 </template>

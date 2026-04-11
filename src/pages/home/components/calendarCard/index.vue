@@ -2,142 +2,99 @@
 import { computed } from 'vue'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
-import { cardSpacing, useViewport } from '@/hooks/useViewport'
 
 const cardName = 'calendarCard'
-const { centerX, centerY } = useViewport()
-const width = cardStyles[cardName].width
-const height = cardStyles[cardName].height
-const order = cardStyles[cardName].order
-const x = computed(() => centerX.value + cardSpacing + cardStyles.hiCard.width / 2)
-const y = computed(() => centerY.value - cardStyles.clockCard.offset + cardSpacing)
-
-// 获取当前月份的所有日期
-const calendarData = computed(() => {
-  const now = new Date()
-  const year = now.getFullYear()
-  const month = now.getMonth()
-
-  // 获取当月第一天和最后一天
-  const firstDay = new Date(year, month, 1)
-  const lastDay = new Date(year, month + 1, 0)
-
-  // 获取当月第一天是星期几（0=周日，1=周一...）
-  // 转换为从周一开始：1=周一，2=周二...，7=周日
-  let firstDayOfWeek = firstDay.getDay()
-  firstDayOfWeek = firstDayOfWeek === 0 ? 7 : firstDayOfWeek // 周日转换为7
-
-  // 获取当月总天数
-  const daysInMonth = lastDay.getDate()
-
-  // 获取上个月的最后一天和总天数
-  const prevMonth = month === 0 ? 11 : month - 1
-  const prevYear = month === 0 ? year - 1 : year
-  const prevMonthLastDay = new Date(prevYear, prevMonth + 1, 0)
-  const prevMonthDays = prevMonthLastDay.getDate()
-
-  // 生成日历数组，每个元素包含 { day, isCurrentMonth, month, year }
-  const days = []
-
-  // 填充上个月的日期（从周一开始）
-  // 如果第一天是周一(firstDayOfWeek=1)，不需要上个月的日期
-  // 如果第一天是周二(firstDayOfWeek=2)，需要1天上个月的日期
-  // 如果第一天是周日(firstDayOfWeek=7)，需要6天上个月的日期
-  const prevMonthDaysCount = firstDayOfWeek - 1
-  if (prevMonthDaysCount > 0) {
-    const prevMonthStart = prevMonthDays - prevMonthDaysCount + 1
-    for (let i = prevMonthStart; i <= prevMonthDays; i++) {
-      days.push({
-        day: i,
-        isCurrentMonth: false,
-        month: prevMonth + 1,
-        year: prevYear,
-      })
-    }
-  }
-
-  // 填充当月的日期
-  for (let day = 1; day <= daysInMonth; day++) {
-    days.push({
-      day,
-      isCurrentMonth: true,
-      month: month + 1,
-      year,
-    })
-  }
-
-  // 填充下个月的日期（补齐到6行，每行7天，共42天）
-  const remainingDays = 42 - days.length
-  for (let day = 1; day <= remainingDays; day++) {
-    const nextMonth = month === 11 ? 0 : month + 1
-    const nextYear = month === 11 ? year + 1 : year
-    days.push({
-      day,
-      isCurrentMonth: false,
-      month: nextMonth + 1,
-      year: nextYear,
-    })
-  }
-
-  return {
-    year,
-    month: month + 1, // 月份从1开始
-    monthName: now.toLocaleDateString('zh-CN', { month: 'long' }),
-    days,
-  }
-})
-
-// 判断是否是今天
-function isToday(dayInfo) {
-  if (!dayInfo || !dayInfo.isCurrentMonth)
-    return false
-  const now = new Date()
-  return (
-    now.getDate() === dayInfo.day
-    && now.getMonth() === calendarData.value.month - 1
-    && now.getFullYear() === calendarData.value.year
-  )
-}
-
-// 星期标题（从周一开始）
+const { width, height, order, offset } = cardStyles[cardName]
 const weekDays = ['一', '二', '三', '四', '五', '六', '日']
 
-// 获取今天的日期和星期
-const todayInfo = computed(() => {
-  const now = new Date()
-  const day = now.getDate()
-  const dayOfWeek = now.getDay() // 0=周日, 1=周一, ..., 6=周六
-  const weekDayNames = ['日', '一', '二', '三', '四', '五', '六']
+const now = new Date()
+const todayYear = now.getFullYear()
+const todayMonth = now.getMonth()
+const todayDate = now.getDate()
+const weekDayNames = ['日', '一', '二', '三', '四', '五', '六']
+
+const todayInfo = {
+  day: todayDate,
+  weekDay: weekDayNames[now.getDay()],
+}
+
+const calendarData = computed(() => {
+  const firstDay = new Date(todayYear, todayMonth, 1)
+  const daysInMonth = new Date(todayYear, todayMonth + 1, 0).getDate()
+  const firstDayOfWeek = firstDay.getDay() === 0 ? 7 : firstDay.getDay()
+
+  const prevMonth = todayMonth === 0 ? 11 : todayMonth - 1
+  const prevYear = todayMonth === 0 ? todayYear - 1 : todayYear
+  const prevMonthDays = new Date(prevYear, prevMonth + 1, 0).getDate()
+
+  const nextMonth = todayMonth === 11 ? 0 : todayMonth + 1
+  const nextYear = todayMonth === 11 ? todayYear + 1 : todayYear
+
+  const days = []
+  const prevMonthDaysCount = firstDayOfWeek - 1
+
+  for (let day = prevMonthDays - prevMonthDaysCount + 1; day <= prevMonthDays; day++) {
+    if (prevMonthDaysCount <= 0) break
+    days.push({
+      key: `${prevYear}-${prevMonth + 1}-${day}`,
+      day,
+      isCurrentMonth: false,
+      isToday: false,
+    })
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    days.push({
+      key: `${todayYear}-${todayMonth + 1}-${day}`,
+      day,
+      isCurrentMonth: true,
+      isToday: day === todayDate,
+    })
+  }
+
+  const remainingDays = 42 - days.length
+  for (let day = 1; day <= remainingDays; day++) {
+    days.push({
+      key: `${nextYear}-${nextMonth + 1}-${day}`,
+      day,
+      isCurrentMonth: false,
+      isToday: false,
+    })
+  }
+
   return {
-    day,
-    weekDay: weekDayNames[dayOfWeek],
+    year: todayYear,
+    month: todayMonth + 1,
+    days,
   }
 })
 </script>
 
 <template>
-  <WidgetCard class="p-6" :width="width" :height="height" :x="x" :y="y" :order="order">
-    <div class="flex flex-col h-full w-full overflow-hidden">
-      <!-- 月份标题 -->
-      <h2 class="text-left mb-3 shrink-0 px-2 text-sm text-gray-500">
+  <WidgetCard class="absolute card p-6" :class="offset" :order="order" :width="width" :height="height">
+    <div class="flex h-full w-full flex-col overflow-hidden">
+      <h2 class="mb-3 shrink-0 px-2 text-left text-sm text-gray-500">
         {{ calendarData.year }}年{{ calendarData.month }}月{{ todayInfo.day }}日 星期{{ todayInfo.weekDay }}
       </h2>
 
-      <!-- 星期标题 -->
-      <div class="grid grid-cols-7  mb-3 shrink-0 ">
-        <div v-for="day in weekDays" :key="day" class="text-center text-xs font-medium text-gray-500">
+      <div class="mb-3 grid shrink-0 grid-cols-7">
+        <div
+          v-for="day in weekDays"
+          :key="day"
+          class="text-center text-xs font-medium text-gray-500"
+        >
           {{ day }}
         </div>
       </div>
 
-      <!-- 日期网格 -->
-      <div class="grid grid-cols-7 flex-1" style="grid-template-rows: repeat(6, minmax(0, 1fr));">
+      <div class="grid flex-1 grid-cols-7" style="grid-template-rows: repeat(6, minmax(0, 1fr))">
         <div
-          v-for="(dayInfo, index) in calendarData.days" :key="index"
-          class="flex items-center justify-center text-sm w-full h-full min-h-0 overflow-hidden rounded-lg"
+          v-for="dayInfo in calendarData.days"
+          :key="dayInfo.key"
+          class="flex h-full min-h-0 w-full items-center justify-center overflow-hidden rounded-lg text-sm"
           :class="{
             'text-gray-500/50': !dayInfo.isCurrentMonth,
-            'bg-primary border border-border font-bold text-white': isToday(dayInfo),
+            'border border-border bg-primary font-bold text-white': dayInfo.isToday,
           }"
         >
           {{ dayInfo.day }}

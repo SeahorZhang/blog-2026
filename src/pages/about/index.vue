@@ -1,16 +1,17 @@
 <script setup>
 import { motion } from 'motion-v'
+import avatarImg from '@/assets/imgs/avatar/avatar.png'
 import { version } from '~build/package'
 import now from '~build/time'
 import { socialLinks } from '@/config/baseInfo.js'
 import { useViewport } from '@/hooks/useViewport'
-const { isMobile } = useViewport()
 
+const { isMobile } = useViewport()
 const formattedTime = new Date(now).toLocaleString()
 </script>
 
 <template>
-  <div class="mx-auto max-w-[1000px] space-y-6">
+  <div class="mx-auto max-w-250 space-y-6" :class="{ 'pt-32': !isMobile }">
     <motion.div
       class="card"
       :initial="{ opacity: 0, scale: 0.6 }"
@@ -18,8 +19,12 @@ const formattedTime = new Date(now).toLocaleString()
     >
       <div class="flex items-center gap-4" :class="{ 'flex-col': isMobile }">
         <img
-          src="@/assets/imgs/avatar/avatar.png"
+          :src="avatarImg"
           alt="App Icon"
+          width="64"
+          height="64"
+          loading="lazy"
+          decoding="async"
           class="size-16 rounded-xl shadow-sm ring-1 ring-gray-200"
         />
 
@@ -51,13 +56,13 @@ const formattedTime = new Date(now).toLocaleString()
         <div class="flex gap-2">
           <a
             v-for="link in socialLinks"
-            :key="link.name"
+            :key="link.url"
             :href="link.url"
             target="_blank"
             class="flex items-center gap-1 rounded-lg border border-border bg-card px-3 py-1 text-sm transition-colors hover:bg-gray-200"
           >
             <Icon :icon="link.icon" />
-            <span>{{ link.name }}</span>
+            <span>{{ link.label }}</span>
           </a>
         </div>
       </div>

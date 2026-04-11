@@ -1,43 +1,51 @@
 <script setup>
 import { computed } from 'vue'
+import avatarImg from '@/assets/imgs/avatar/avatar.png'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
-import { useViewport } from '@/hooks/useViewport'
 
-const greeting = computed(() => {
+const cardName = 'hiCard'
+const { width, height, order } = cardStyles[cardName]
+
+function getGreeting() {
   const hour = new Date().getHours()
+
   if (hour >= 6 && hour < 12) {
     return '早上好'
   }
-  else if (hour >= 12 && hour < 18) {
+  if (hour >= 12 && hour < 18) {
     return '下午好'
   }
-  else if (hour >= 18 && hour < 22) {
+  if (hour >= 18 && hour < 22) {
     return '晚上好'
   }
-  else {
-    return '晚安'
-  }
-})
 
-const cardName = 'hiCard'
-const { centerX, centerY } = useViewport()
-const width = cardStyles[cardName].width
-const height = cardStyles[cardName].height
-const order = cardStyles[cardName].order
-const x = computed(() => centerX.value - width / 2)
-const y = computed(() => centerY.value - height / 2)
+  return '晚安'
+}
+
+const greeting = getGreeting()
+const avatarStyle = computed(() => ({
+  boxShadow: '0 16px 32px -5px #E2D9CE',
+}))
 </script>
 
 <template>
-  <WidgetCard class="p-6" :x="x" :y="y" :width="width" :height="height" :order="order">
+  <WidgetCard class="card p-6" :order="order" :width="width" :height="height">
     <img
-      src="@/assets/imgs/avatar/avatar.png" alt="Me" class="w-28 h-28 rounded-full mx-auto mb-4"
-      :style="{ boxShadow: '0 16px 32px -5px #E2D9CE' }"
-    >
-    <h1 class="font-averia mt-3 text-2xl text-center">
-      {{ greeting }}！ <br> 我是 <span class="text-linear text-[32px]"> Seahor </span> ，
-      很高兴 <br> 见到你！
+      :src="avatarImg"
+      alt="Me"
+      width="112"
+      height="112"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="mx-auto mb-4 h-28 w-28 rounded-full"
+      :style="avatarStyle"
+    />
+    <h1 class="font-averia mt-3 text-center text-2xl">
+      {{ greeting }}！ <br />
+      我是 <span class="text-linear text-[32px]"> Seahor </span> ， 很高兴 <br />
+      见到你！
     </h1>
   </WidgetCard>
 </template>

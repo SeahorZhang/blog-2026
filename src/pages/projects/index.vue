@@ -1,11 +1,25 @@
 <script setup>
 import { motion } from 'motion-v'
 import { projects } from '@/config/baseInfo.js'
+import { useViewport } from '@/hooks/useViewport'
+const { isMobile } = useViewport()
 </script>
 
 <template>
-  <div
-    class="mx-auto grid w-full max-w-[1000px] grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1"
+  <div class="mx-auto w-full px-28" :class="{ 'py-32': !isMobile }">
+    <motion.div
+      class="flex w-full justify-center overflow-hidden card"
+      :initial="{ opacity: 0, scale: 0.6 }"
+      :animate="{ opacity: 1, scale: 1 }"
+      :while-hover="{ scale: 1.05 }"
+    >
+      一事无成
+    </motion.div>
+  </div>
+
+  <!--  <div
+    class="mx-auto grid w-full max-w-250 grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1"
+    :class="{ 'pt-32': !isMobile }"
   >
     <motion.div
       v-for="item in projects"
@@ -41,5 +55,5 @@ import { projects } from '@/config/baseInfo.js'
         </p>
       </div>
     </motion.div>
-  </div>
+  </div> -->
 </template>
