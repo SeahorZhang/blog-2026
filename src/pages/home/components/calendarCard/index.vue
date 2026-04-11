@@ -71,10 +71,18 @@ const calendarData = computed(() => {
 </script>
 
 <template>
-  <WidgetCard class="absolute card p-6" :class="offset" :order="order" :width="width" :height="height">
+  <WidgetCard
+    class="absolute card p-6"
+    :class="offset"
+    :order="order"
+    :width="width"
+    :height="height"
+  >
     <div class="flex h-full w-full flex-col overflow-hidden">
       <h2 class="mb-3 shrink-0 px-2 text-left text-sm text-gray-500">
-        {{ calendarData.year }}年{{ calendarData.month }}月{{ todayInfo.day }}日 星期{{ todayInfo.weekDay }}
+        {{ calendarData.year }}年{{ calendarData.month }}月{{ todayInfo.day }}日 星期{{
+          todayInfo.weekDay
+        }}
       </h2>
 
       <div class="mb-3 grid shrink-0 grid-cols-7">
@@ -94,7 +102,7 @@ const calendarData = computed(() => {
           class="flex h-full min-h-0 w-full items-center justify-center overflow-hidden rounded-lg text-sm"
           :class="{
             'text-gray-500/50': !dayInfo.isCurrentMonth,
-            'border border-border bg-primary font-bold text-white': dayInfo.isToday,
+            'border calendar-today border-border font-bold text-white': dayInfo.isToday,
           }"
         >
           {{ dayInfo.day }}

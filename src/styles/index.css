@@ -6,6 +6,9 @@
   --color-card: #ffffff66;
   --color-base: #4E3F42;
   --color-brand-secondary: #FCC841;
+  --color-name-primary: #de4331;
+  --color-name-secondary: #FCC841;
+  --color-calendar-today: #de4331;
   --animate-blob: blob 12s ease-in-out infinite;
   --animate-blob-center: blobCenter 12s ease-in-out infinite;
 
@@ -63,7 +66,6 @@ body,
   padding: 0;
 }
 
-
 @utility card {
   @apply rounded-[40px] border-border border p-6;
   box-shadow: 0 40px 50px -32px #0000000d, inset 0 0 20px #ffffff40;
@@ -71,10 +73,13 @@ body,
   backdrop-filter: blur(4px);
 }
 
-
 @utility text-linear {
-  background: linear-gradient(to right bottom, #0003 0%, #aaa1), linear-gradient(to right bottom, var(--color-primary) 40%, var(--color-brand-secondary));
+  background: linear-gradient(to right bottom, #0003 0%, #aaa1), linear-gradient(to right bottom, var(--color-name-primary) 40%, var(--color-name-secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+@utility calendar-today {
+  background-color: var(--color-calendar-today);
 }
