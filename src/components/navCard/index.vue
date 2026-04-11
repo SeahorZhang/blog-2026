@@ -27,7 +27,7 @@ const collapse = computed(() => route.name === 'home' && !isMobile.value)
 const cardInfo = computed(() => {
   if (!collapse.value) {
     return {
-      width: 274,
+      width: 294,
       height: 64,
       x: 16,
       y: 16,
@@ -48,7 +48,7 @@ const cardInfo = computed(() => {
   <WidgetCard
     :order="collapse ? order : 0"
     :class="[
-      !collapse ? 'flex items-center p-0' : 'space-y-2 overflow-hidden p-6',
+      !collapse ? 'flex items-center justify-center gap-1.5 p-0' : 'space-y-2 overflow-hidden p-6',
       cardInfo.offset,
     ]"
     class="fixed z-1 card"
