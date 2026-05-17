@@ -9,7 +9,7 @@ import { useViewport } from '@/hooks/useViewport'
 const { isMobile, centerX, centerY } = useViewport()
 const centerStyle = computed(() => ({
   left: `${centerX.value}px`,
-  top: `${centerY.value}px`,
+  top: `${centerY.value-50}px`,
 }))
 </script>
 

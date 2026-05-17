@@ -37,7 +37,7 @@ const cardInfo = computed(() => {
       width,
       height,
       x: x.value - 45,
-      y: y.value,
+      y: y.value - 50,
       offset,
     }
   }
