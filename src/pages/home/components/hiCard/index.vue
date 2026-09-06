@@ -43,7 +43,7 @@ const avatarStyle = computed(() => ({
       class="mx-auto mb-4 h-28 w-28 rounded-full"
       :style="avatarStyle"
     />
-    <h1 class="font-averia mt-3 text-center text-2xl">
+    <h1 class="mt-3 text-center text-2xl">
       {{ greeting }}！ <br />
       我是 <span class="text-linear text-[32px]"> Seahor </span> ， 很高兴 <br />
       见到你！

@@ -9,6 +9,7 @@ import { useViewport } from '@/hooks/useViewport'
 const cardName = 'socialButtons'
 const { isMobile, width } = useViewport()
 const { order, offset, width: cardWidth, height: cardHeight } = cardStyles[cardName]
+const positionClass = `absolute justify-end ${offset}`
 
 const showName = computed(() => width.value > 500)
 
@@ -23,7 +24,7 @@ function getItemDelay(index) {
 
 <template>
   <WidgetCard
-    :class="isMobile ? '' : 'absolute justify-end' + ' ' + offset"
+    :class="isMobile ? '' : positionClass"
     :order="order"
     no-hover
     :width="cardWidth"

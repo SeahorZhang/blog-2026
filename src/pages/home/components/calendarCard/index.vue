@@ -7,6 +7,7 @@ import { useViewport } from '@/hooks/useViewport'
 const { isMobile } = useViewport()
 const cardName = 'calendarCard'
 const { width, height, order, offset } = cardStyles[cardName]
+const positionClass = `absolute ${offset}`
 const weekDays = ['一', '二', '三', '四', '五', '六', '日']
 
 const now = new Date()
@@ -75,7 +76,7 @@ const calendarData = computed(() => {
 <template>
   <WidgetCard
     class="card p-6"
-    :class="isMobile ? '' : 'absolute' + ' ' + offset"
+    :class="isMobile ? '' : positionClass"
     :order="order"
     :width="width"
     :height="height"

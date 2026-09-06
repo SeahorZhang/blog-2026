@@ -396,7 +396,7 @@ export async function processCategories(categories) {
   // 并行处理所有应用
   await promisePool(
     allApps,
-    async ({ app, category, iconMissing }) => {
+    async ({ app }) => {
       try {
         const result = await processApp(app);
 

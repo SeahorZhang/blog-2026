@@ -69,6 +69,9 @@ let animationFrameId = null // 动画帧 ID
 let resizeObserver = null // 窗口大小监听器
 let resizeTimer = null // 防抖定时器
 
+const prefersReducedMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 /**
  * 绘制分支线条
  * @param {CanvasRenderingContext2D} ctx - Canvas 2D 上下文
@@ -189,6 +192,10 @@ onMounted(() => {
     }
     resizeTimer = setTimeout(() => {
       initCanvas()
+      // 减少动态效果模式下，尺寸变化后仅重绘一帧静态画面
+      if (prefersReducedMotion) {
+        renderFrame()
+      }
     }, CONSTANTS.RESIZE_DEBOUNCE)
   })
 
@@ -197,8 +204,12 @@ onMounted(() => {
     resizeObserver.observe(canvasContainerRef.value)
   }
 
-  // 启动动画循环
-  animate()
+  // 尊重"减少动态效果"偏好：只绘制一帧静态画面，否则启动动画循环
+  if (prefersReducedMotion) {
+    renderFrame()
+  } else {
+    animate()
+  }
 })
 
 /**
@@ -373,13 +384,11 @@ function updateSnowflake(snowflake) {
 }
 
 /**
- * 动画循环函数
- * 每一帧清空画布，更新所有雪花状态并重新绘制
+ * 渲染一帧
+ * 清空画布，更新所有雪花状态并重新绘制
  */
-function animate() {
-  // 如果 Canvas 未初始化或尺寸无效，继续请求下一帧
+function renderFrame() {
   if (!context.value || canvasSize.w === 0 || canvasSize.h === 0) {
-    animationFrameId = requestAnimationFrame(animate)
     return
   }
 
@@ -393,6 +402,20 @@ function animate() {
     updateSnowflake(snowflake)
     drawSnowflake(snowflake)
   }
+}
+
+/**
+ * 动画循环函数
+ * 每一帧调用 renderFrame 绘制，然后请求下一帧
+ */
+function animate() {
+  // 如果 Canvas 未初始化或尺寸无效，继续请求下一帧
+  if (!context.value || canvasSize.w === 0 || canvasSize.h === 0) {
+    animationFrameId = requestAnimationFrame(animate)
+    return
+  }
+
+  renderFrame()
 
   // 请求下一帧动画
   animationFrameId = requestAnimationFrame(animate)

@@ -1,0 +1,4 @@
+allowBuilds:
+  sharp: set this to true or false
+minimumReleaseAgeExclude:
+  - eslint-plugin-vue@10.11.0

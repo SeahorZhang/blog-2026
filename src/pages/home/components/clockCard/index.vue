@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import WidgetCard from '@/components/WidgetCard.vue'
 import cardStyles from '@/config/card-styles.json'
 import Colon from './components/Colon.vue'
@@ -9,6 +9,7 @@ import { useViewport } from '@/hooks/useViewport'
 const { isMobile } = useViewport()
 const cardName = 'clockCard'
 const { width, height, order, offset } = cardStyles[cardName]
+const positionClass = `absolute ${offset}`
 
 const times = ref(['0', '0', '0', '0', '0', '0'])
 let timer = null
@@ -43,7 +44,7 @@ onBeforeUnmount(() => {
 <template>
   <WidgetCard
     class="card p-2"
-    :class="isMobile ? '' : 'absolute' + ' ' + offset"
+    :class="isMobile ? '' : positionClass"
     :order="order"
     :width="width"
     :height="height"

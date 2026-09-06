@@ -20,7 +20,7 @@ export async function checkEnvironment() {
   for (const cmd of commands) {
     try {
       await safeExec(`which ${cmd}`);
-    } catch (error) {
+    } catch {
       throw new Error(`缺少必要命令: ${cmd}。请确保macOS系统工具已安装。`);
     }
   }

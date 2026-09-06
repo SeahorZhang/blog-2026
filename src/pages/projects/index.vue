@@ -1,6 +1,5 @@
 <script setup>
 import { motion } from 'motion-v'
-import { projects } from '@/config/baseInfo.js'
 import { useViewport } from '@/hooks/useViewport'
 const { isMobile } = useViewport()
 </script>

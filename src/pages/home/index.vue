@@ -15,7 +15,6 @@ const centerStyle = computed(() => ({
 
 <template>
   <div
-    class=""
     :class="isMobile ? '' : 'absolute -translate-x-1/2 -translate-y-1/2'"
     :style="centerStyle"
   >

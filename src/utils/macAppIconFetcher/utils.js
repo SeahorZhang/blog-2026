@@ -93,12 +93,12 @@ export async function preWarmFileSystem(directory) {
         try {
           // 只读取几个文件的元数据来激活文件系统缓存
           fs.statSync(path.join(directory, file));
-        } catch (e) {
+        } catch {
           // 忽略单个文件错误
         }
       }
     }
-  } catch (e) {
+  } catch {
     // 忽略预热错误
   }
 }

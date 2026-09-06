@@ -1,11 +1,8 @@
 import fs from "fs";
 import path from "path";
-import { exec } from "child_process";
-import util from "util";
 import { logger } from "./logger.js";
 import { safeExec } from "./utils.js";
 
-const execPromise = util.promisify(exec);
 const MIN_ICON_SIZE = 1000; // 最小有效图标大小(字节)，固定值而非配置
 
 /**

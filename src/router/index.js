@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import NavVidw from '@/components/navCard/index.vue'
+import NavView from '@/components/navCard/index.vue'
 import AboutView from '@/pages/about/index.vue'
 import HomeView from '@/pages/home/index.vue'
 import ProjectsView from '@/pages/projects/index.vue'
@@ -12,7 +12,7 @@ const routes = [
     name: 'home',
     components: {
       default: HomeView,
-      navVidw: NavVidw,
+      navView: NavView,
     },
   },
   {
@@ -20,7 +20,7 @@ const routes = [
     name: 'tools',
     components: {
       default: ToolsView,
-      navVidw: NavVidw,
+      navView: NavView,
     },
   },
   {
@@ -28,7 +28,7 @@ const routes = [
     name: 'projects',
     components: {
       default: ProjectsView,
-      navVidw: NavVidw,
+      navView: NavView,
     },
   },
   {
@@ -36,7 +36,7 @@ const routes = [
     name: 'about',
     components: {
       default: AboutView,
-      navVidw: NavVidw,
+      navView: NavView,
     },
   },
 ]

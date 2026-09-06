@@ -14,7 +14,7 @@ watchEffect(() => {
 
 <template>
   <Background />
-  <router-view v-slot="{ Component }" name="navVidw">
+  <router-view v-slot="{ Component }" name="navView">
     <component :is="Component" />
   </router-view>
 
